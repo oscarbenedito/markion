@@ -145,4 +145,4 @@ In order to make sure there is no missunderstanding, we will include the followi
 
 ## Author
 
-- **Oscar Benedito** - oscar@obenedito.org
+- **Oscar Benedito** - oscar@oscarbenedito.com
