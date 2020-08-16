@@ -179,33 +179,32 @@ for fn, fc in file_content.items():
 
 ## License
 
-The program is licensed under the GNU General Public License version 3
-(available [here][gpl]).
+The program is licensed under the GNU Affero General Public License version 3 or
+later (available [here][agpl]).
 
 In order to make sure there is no missunderstanding, we will include the
 following license notice on our file.
 
 ```python block license
-# Copyright (C) 2019 Oscar Benedito
+# Markion
+# Copyright (C) 2019-2020 Oscar Benedito <oscar@oscarbenedito.com>
 #
-# This file is part of Markion.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
 #
-# Markion is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Markion is distributed in the hope that it will be useful,
+# This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# GNU Affero General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with Markion.  If not, see <https://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
 
 ## Author
 
 - **Oscar Benedito** - oscar@oscarbenedito.com
 
-[gpl]: <https://www.gnu.org/licenses/gpl-3.0.html> "The GNU General Public License v3.0"
+[agpl]: <https://www.gnu.org/licenses/agpl-3.0.en.html> "GNU Affero General Public License v3.0"
