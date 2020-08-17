@@ -38,19 +38,19 @@ To run the program, execute the file `markion.py` followed by the input file.
 python3 markion.py file
 ```
 
-There is an addition option `--output-directory` (or `-d`) to specify an output
-directory and you can also run the program with `--help` (or `-h`) to get help
-about the program's usage.
+Run the program with `--help` (or `-h`) to get help about the program's usage
+and options.
 
 ## Explanation of the program
 
-First of all, we will make it executable, we'll write the license notice and
-import all the required libraries.
+First of all, we will add the shebang, license notice, import all the required
+libraries and set the version.
 
 ```python file markion.py
 #!/usr/bin/env python3
 [[ include license ]]
 import os, sys, re, argparse
+__version__ = "1.0.0"
 ```
 
 ### Program arguments
@@ -59,10 +59,10 @@ We will use Python's `argparse` package to deal with our program's arguments. We
 initialize the parser with a brief description of the program's utility.
 
 ```python file markion.py
-parser = argparse.ArgumentParser(description='Markion is a simple scripts that retrieves tangled code from Markdown.')
+parser = argparse.ArgumentParser(prog='Markion', description='Markion is a simple scripts that retrieves tangled code from Markdown.')
 ```
 
-One of the arguments is the name of the input file:
+One of the arguments is the name of the input file.
 
 ```python file markion.py
 parser.add_argument('file', metavar='file', type=str, nargs=1, help='Input file.')
@@ -74,9 +74,9 @@ Another optional argument lets the user specify the output directory.
 parser.add_argument('-d', '--output-directory', dest='out_dir', type=str, default=os.getcwd(), help='Change the output directory.')
 ```
 
-The other argument is also optional and it lets the program automatically detect
-the output directory (based on the file's directory). This option will override
-the `--output-directory` option.
+The user can also let the program automatically detect the output directory
+(based on the file's directory). This option will override the
+`--output-directory` option.
 
 ```python file markion.py
 parser.add_argument('-D', '--auto-directory', dest='auto_dir', action='store_true', help='Auto detect output directory.')
@@ -90,8 +90,13 @@ if args.auto_dir:
     args.out_dir = os.path.dirname(args.file[0])
 ```
 
-Finally we assign the arguments' values to the `args` variable to use it later
-on.
+Finally, there is an option to retrieve the current version.
+
+```python file markion.py
+parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
+```
+
+Assign the arguments' values to the `args` variable to use it later on.
 
 ```python file markion.py
 args = parser.parse_args()
@@ -99,7 +104,7 @@ args = parser.parse_args()
 
 ### Reading the input file
 
-We read the input file and copy the contents to a variable `inp`.
+Read the input file and copy the contents to a variable `inp`.
 
 ```python file markion.py
 with open(args.file[0], 'r') as f:
@@ -108,10 +113,10 @@ with open(args.file[0], 'r') as f:
 
 ### Extracting the tangled code
 
-We extract the important pieces of code from the `inp` variable. To do so there
-are two regular expressions, one that matches the blocks and one that matches
-the content to output in the files. We get all the snippets and save them into
-the variables `blocks` and `files`.
+Extract the important pieces of code from the `inp` variable. To do so there are
+two regular expressions, one that matches the blocks and one that matches the
+content to output in the files. We get all the snippets and save them into the
+variables `blocks` and `files`.
 
 ```python file markion.py
 r_block = '```[\w\-.]*\s+block\s+([\w.-]+).*?\n(.*?)\n```\s*?\n'
@@ -173,7 +178,7 @@ And we write the output.
 
 ```python file markion.py
 for fn, fc in file_content.items():
-    with open(args.out_dir + '/' + fn, 'w') as f:
+    with open(os.path.join(args.out_dir, fn), 'w') as f:
         f.write(fc)
 ```
 

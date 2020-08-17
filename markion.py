@@ -15,10 +15,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import os, sys, re, argparse
-parser = argparse.ArgumentParser(description='Markion is a simple scripts that retrieves tangled code from Markdown.')
+__version__ = "1.0.0"
+parser = argparse.ArgumentParser(prog='Markion', description='Markion is a simple scripts that retrieves tangled code from Markdown.')
 parser.add_argument('file', metavar='file', type=str, nargs=1, help='Input file.')
 parser.add_argument('-d', '--output-directory', dest='out_dir', type=str, default=os.getcwd(), help='Change the output directory.')
 parser.add_argument('-D', '--auto-directory', dest='auto_dir', action='store_true', help='Auto detect output directory.')
+parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
 args = parser.parse_args()
 with open(args.file[0], 'r') as f:
     inp = f.read()
@@ -51,5 +53,5 @@ if args.auto_dir:
 if not os.path.exists(args.out_dir):
     os.mkdirs(args.out_dir)
 for fn, fc in file_content.items():
-    with open(args.out_dir + '/' + fn, 'w') as f:
+    with open(os.path.join(args.out_dir, fn), 'w') as f:
         f.write(fc)
